@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Secure Password Generator</title>
+</head>
+<body>
+<main class="app">
+    <section id="mainView" class="view">
+        <header class="header">
+            <div class="brand">
+                <span id="brandIcon" class="brand-badge" aria-hidden="true"></span>
+                <div>
+                    <h1 class="header-title">Secure Password Generator</h1>
+                    <p class="header-subtitle">Generated locally for maximum privacy</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="view-body">
+            <section class="password-card" aria-label="Generated password">
+                <div id="password" class="password" aria-live="polite">—</div>
+                <button id="generateIconButton" class="mini-generate-button" type="button"
+                        aria-label="Generate password" title="Generate new password">
+                    <span id="generateButtonIcon" aria-hidden="true"></span>
+                </button>
+                <button id="copyButton" class="copy-button" type="button">
+                    <span id="copyButtonIcon" aria-hidden="true"></span>
+                    <span class="button-label">Copy</span>
+                </button>
+            </section>
+
+            <section class="strength-card" aria-label="Password strength">
+                <div class="strength-row">
+                    <div class="strength-meter" aria-hidden="true">
+                        <span class="strength-segment"></span>
+                        <span class="strength-segment"></span>
+                        <span class="strength-segment"></span>
+                        <span class="strength-segment"></span>
+                        <span class="strength-segment"></span>
+                    </div>
+                    <span id="strengthLabel" class="strength-label">Very strong</span>
+                </div>
+            </section>
+
+            <section class="length-card" aria-label="Password length">
+                <div class="length-top">
+                    <h2 class="section-title">Length</h2>
+                    <input
+                            id="lengthValue"
+                            class="length-input"
+                            type="number"
+                            min="8"
+                            max="2048"
+                            step="1"
+                            value="20"
+                            inputmode="numeric"
+                            autocomplete="off"
+                            aria-label="Password length"
+                    />
+                </div>
+                <input
+                        id="length"
+                        class="range"
+                        type="range"
+                        min="8"
+                        max="2048"
+                        step="1"
+                        value="32"
+                        aria-label="Password length slider"
+                />
+                <div class="range-labels">
+                    <span>8</span>
+                    <span>2048</span>
+                </div>
+            </section>
+
+            <p id="error" class="error" role="alert" hidden></p>
+        </div>
+
+        <footer class="footer">
+            <button id="openSettingsButton" class="settings-button" type="button">
+                <span id="settingsButtonIcon" aria-hidden="true"></span>
+                <span>Settings</span>
+            </button>
+            <span class="footer-divider" aria-hidden="true"></span>
+            <div class="privacy-note-wrap">
+                <span id="privacyIcon" class="privacy-icon" aria-hidden="true"></span>
+                <p class="privacy-note">Generated locally • Never stored</p>
+            </div>
+        </footer>
+    </section>
+
+    <section id="settingsView" class="view" hidden>
+        <header class="settings-header">
+            <div class="settings-title-row">
+                <button id="closeSettingsButton" class="secondary-icon-button" type="button"
+                        aria-label="Back to generator">
+                    <span id="backButtonIcon" aria-hidden="true"></span>
+                </button>
+                <h2 class="settings-title">Settings</h2>
+            </div>
+        </header>
+
+        <div class="view-body">
+            <section class="settings-section settings-card">
+                <h3 class="section-title">Password options</h3>
+                <p class="section-description">Choose which characters to include in generated passwords.</p>
+
+                <div class="option-grid">
+                    <label class="option-card">
+                        <input id="uppercase" class="checkbox-control" type="checkbox" checked/>
+                        <div>
+                            <p class="option-card-title">Uppercase</p>
+                            <p class="option-card-subtitle">A–Z</p>
+                        </div>
+                    </label>
+
+                    <label class="option-card">
+                        <input id="lowercase" class="checkbox-control" type="checkbox" checked/>
+                        <div>
+                            <p class="option-card-title">Lowercase</p>
+                            <p class="option-card-subtitle">a–z</p>
+                        </div>
+                    </label>
+
+                    <label class="option-card">
+                        <input id="numbers" class="checkbox-control" type="checkbox" checked/>
+                        <div>
+                            <p class="option-card-title">Numbers</p>
+                            <p class="option-card-subtitle">0–9</p>
+                        </div>
+                    </label>
+
+                    <label class="option-card">
+                        <input id="excludeSimilar" class="checkbox-control" type="checkbox"/>
+                        <div>
+                            <p class="option-card-title">Exclude similar</p>
+                            <p class="option-card-subtitle">O 0 I l 1</p>
+                        </div>
+                    </label>
+                </div>
+
+                <section class="symbol-card">
+                    <div class="symbol-top">
+                        <div class="symbol-title-wrap">
+                            <input id="symbols" class="checkbox-control" type="checkbox" checked/>
+                            <div>
+                                <p class="option-card-title">Symbols</p>
+                                <p class="option-card-subtitle">Customizable special characters</p>
+                            </div>
+                        </div>
+                        <div class="symbol-actions-top">
+                            <button id="toggleSymbolEditorButton" class="inline-button" type="button">Hide</button>
+                            <button id="resetSymbols" class="icon-button-ghost" type="button"
+                                    title="Reset symbols to default">
+                                <span id="resetSymbolsIcon" class="icon-slot" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="symbolEditor" class="symbol-editor">
+                        <input
+                                id="symbolCharacters"
+                                class="symbol-input"
+                                type="text"
+                                value="!@#$%^&amp;*()-_=+[]{};:,.?"
+                                autocomplete="off"
+                                spellcheck="false"
+                                aria-label="Custom symbol set"
+                        />
+                    </div>
+                </section>
+            </section>
+
+            <section class="settings-section behavior-card">
+                <h3 class="section-title">Behaviour</h3>
+                <p class="section-description">Control how the extension works.</p>
+
+                <label class="behavior-row">
+                    <input id="autoCopy" class="checkbox-control" type="checkbox"/>
+                    <div class="behavior-copy">
+                        <p class="behavior-title">Auto copy after generation</p>
+                        <p class="behavior-hint">Automatically copy to clipboard</p>
+                    </div>
+                </label>
+
+                <label class="behavior-row">
+                    <input id="generateOnOpen" class="checkbox-control" type="checkbox" checked/>
+                    <div class="behavior-copy">
+                        <p class="behavior-title">Generate on open</p>
+                        <p class="behavior-hint">Create a new password when the popup opens</p>
+                    </div>
+                </label>
+
+                <div class="behavior-divider" aria-hidden="true"></div>
+
+                <button id="resetAll" class="danger-link" type="button">
+                    <span id="resetAllIcon" class="icon-slot" aria-hidden="true"></span>
+                    <span>Reset all settings</span>
+                </button>
+            </section>
+        </div>
+    </section>
+</main>
+
+<script type="module" src="/src/popup/main.ts"></script>
+</body>
+</html>

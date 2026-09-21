@@ -1,0 +1,19 @@
+{
+  "name": "secure-password-generator-extension",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "sync-version": "node scripts/sync-version.mjs",
+    "prebuild": "npm run sync-version",
+    "build": "tsc --noEmit && vite build",
+    "version": "npm run sync-version",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.3.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.0"
+  }
+}
