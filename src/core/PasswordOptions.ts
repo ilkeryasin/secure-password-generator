@@ -1,6 +1,6 @@
 export const MIN_PASSWORD_LENGTH = 8;
 export const MAX_PASSWORD_LENGTH = 2048;
-export const DEFAULT_PASSWORD_LENGTH = 20;
+export const DEFAULT_PASSWORD_LENGTH = 32;
 export const DEFAULT_SYMBOL_CHARACTERS = '!@#$%^&*()-_=+[]{};:,.?';
 
 export interface PasswordOptions {
@@ -50,11 +50,6 @@ export const DEFAULT_EXTENSION_SETTINGS: ExtensionSettings = {
 
 export const DEFAULT_POPUP_STATE: PopupState = {
   length: DEFAULT_PASSWORD_LENGTH,
-};
-
-export const DEFAULT_PASSWORD_OPTIONS: PasswordOptions = {
-  length: DEFAULT_PASSWORD_LENGTH,
-  ...DEFAULT_CHARACTER_OPTIONS,
 };
 
 export function toPasswordOptions(

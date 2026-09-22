@@ -286,7 +286,7 @@ async function resetAllSettings(): Promise<void> {
   const reset = await settingsRepository.resetAll();
   currentSettings = reset.settings;
   currentPopupState = reset.popupState;
-  symbolEditorExpanded = true;
+  symbolEditorExpanded = false;
 
   renderLengthControls();
   renderSettings();
